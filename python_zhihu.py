@@ -6,6 +6,8 @@ from PIL import Image
 import traceback
 import json
 #模拟知乎登陆，主要是获取验证码登陆
+from click._compat import raw_input
+
 _zhihu_url='https://www.zhihu.com'
 _captcha_url=_zhihu_url+'/captcha.gif?r='
 _captcha_url_end="&type=login";
@@ -59,7 +61,7 @@ class ZhiHu():
         global header_data
         global xsrf
         r=_session.get('https://www.zhihu.com',headers=header_data,verify=True)
-        self.xsrf=re.findall('name="_xsrf" value="([\S\s]*?)"',r.text)[0]
+        self.xsrf=re.findall('name="_xsrf" value="([\S\s]*?)"',r.text)
 
         self.input_data()
         #确定用户名类型
